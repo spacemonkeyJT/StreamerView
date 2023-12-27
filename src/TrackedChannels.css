@@ -3,11 +3,3 @@
   height: 50px;
   border-radius: 25px;
 }
-
-.tracked-channels table {
-  border-collapse: collapse;
-}
-
-.tracked-channels td, .tracked-channels th {
-  border: 1px solid #666;
-}

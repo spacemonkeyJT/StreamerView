@@ -47,7 +47,6 @@ export type ChannelSummary = StreamInfo & {
   profile_image_url: string
   broadcaster_type: string
   user_description: string
-  uptime?: string
   channel_url: string
 }
 
@@ -72,7 +71,6 @@ function readToken() {
 async function apiCall<T>(url: string) {
   const token = readToken()
 
-  // TODO Set the Twitch API prefix in here
   const res = await fetch(`https://api.twitch.tv/helix/${url}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -110,18 +108,7 @@ export function useTwitchAuth() {
   return !!token
 }
 
-function getElapsedDesc(since: string) {
-  const startedTimestamp = new Date(since).valueOf()
-  const totalSec = Math.trunc((Date.now() - startedTimestamp) / 1000)
-  const seconds = totalSec % 60
-  const remain = (totalSec - seconds) / 60
-  const minutes = remain % 60
-  const hours = (remain - minutes) / 60
-  const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`
-  const secStr = seconds < 10 ? `0${seconds}` : `${seconds}`
-  const result = `${hours}:${minutesStr}:${secStr}`
-  return result
-}
+
 
 export async function getChannelInfo(username: string): Promise<ChannelSummary | undefined> {
   const user = (await apiCall<{ data: User[] }>(`users?login=${username}`))?.data[0]
@@ -142,7 +129,6 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           broadcaster_type: user.broadcaster_type,
           profile_image_url: user.profile_image_url,
           user_description: user.description,
-          uptime: getElapsedDesc(stream.started_at!),
           channel_url,
         }
       } else {

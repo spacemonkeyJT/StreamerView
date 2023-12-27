@@ -21,11 +21,14 @@ export default function SearchBox(props: Props) {
   }
 
   return <div className="search-box">
-    <input type="text" value={username} onChange={e => setUsername(e.target.value)} onKeyDown={e => {
-      if (e.key === 'Enter') {
-        doSubmit()
-      }
-    }} />
+    <input type="text" value={username}
+      placeholder="Enter channel name..."
+      onChange={e => setUsername(e.target.value)}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          doSubmit()
+        }
+      }} />
     <button type="button" onClick={() => { doSubmit() }}>Add</button>
   </div>
 }

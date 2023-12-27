@@ -6,10 +6,6 @@ interface Props {
   setChannels: (channels: ChannelSummary[]) => void
 }
 
-interface Props {
-  channel: ChannelSummary
-}
-
 function getElapsedDesc(since: string) {
   const startedTimestamp = new Date(since).valueOf()
   const totalSec = Math.trunc((Date.now() - startedTimestamp) / 1000)

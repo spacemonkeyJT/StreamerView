@@ -1,7 +1,13 @@
+import TrackedChannels from "./TrackedChannels"
+import { useTwitchAuth } from "./Twitch"
+
 function App() {
-  return (
-    <>App text</>
-  )
+  const authorized = useTwitchAuth()
+
+  if (authorized) {
+    return <TrackedChannels />
+  }
+  return null
 }
 
 export default App

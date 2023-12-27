@@ -38,11 +38,13 @@ function LiveCard({ channel }: { channel: ChannelSummary }) {
     <a href={channel.channel_url} target="blank">
       <div className="thumbnail"><img src={channel.thumbnail_url?.replace('{width}', '316').replace('{height}', '178')} /></div>
     </a>
-    <img className="profile-pic" src={channel.profile_image_url} />
-    <div className="broadcaster">{channel.user_name}</div>
-    <div className="category">{channel.game_name}</div>
     <div className="title">{channel.title}</div>
-    <div className="uptime">{getElapsedDesc(channel.started_at!)}</div>
+    <div className="uptime">🔴 {getElapsedDesc(channel.started_at!)}</div>
+    <div className="profile-info">
+      <img className="profile-pic" src={channel.profile_image_url} />
+      <div className="broadcaster">{channel.user_name}</div>
+      <div className="category">{channel.game_name}</div>
+    </div>
     <div className="viewers">{getViewersDesc(channel.viewer_count!)}</div>
   </div>
 }

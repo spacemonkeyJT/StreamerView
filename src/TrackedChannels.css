@@ -3,3 +3,75 @@
   height: 50px;
   border-radius: 25px;
 }
+
+.tracked-channels .live-card {
+  position: relative;
+  margin: 20px 10px;
+  display: inline-block;
+}
+
+.tracked-channels .live-card .profile-pic {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.tracked-channels .live-card .profile-info {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: #000000e0;
+  height: 55px;
+  border-radius: 27px;
+  padding-left: 65px;
+  padding-top: 5px;
+  padding-right: 15px;
+
+  -webkit-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.1);
+}
+
+.tracked-channels .live-card .profile-info .broadcaster {
+  font-weight: 600;
+}
+
+.tracked-channels .live-card .profile-info .category {
+  color: #bbb;
+  font-size: 11pt;
+}
+
+.tracked-channels .live-card .thumbnail {
+  display: inline-block;
+  border: 3px solid #000;
+}
+
+.tracked-channels .live-card .viewers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #000000a0;
+  padding: 3px 7px;
+}
+
+.tracked-channels .live-card .uptime {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-color: #000000c0;
+}
+
+.tracked-channels .live-card .title {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  width: 312px;
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #ccc;
+}
+
+.tracked-channels .offline-card {
+  margin: 10px;
+}

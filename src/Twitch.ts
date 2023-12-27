@@ -48,6 +48,7 @@ export type ChannelSummary = StreamInfo & {
   broadcaster_type: string
   user_description: string
   uptime?: string
+  channel_url: string
 }
 
 function getSiteUrl() {
@@ -132,6 +133,7 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
 
     const channel = channelRes?.data[0]
     const stream = streamRes?.data[0]
+    const channel_url = `https://www.twitch.tv/${user.login}`
 
     if (channel) {
       if (stream) {
@@ -141,6 +143,7 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           profile_image_url: user.profile_image_url,
           user_description: user.description,
           uptime: getElapsedDesc(stream.started_at!),
+          channel_url,
         }
       } else {
         return {
@@ -155,6 +158,7 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           user_login: user.login,
           user_name: user.display_name,
           title: channel.title,
+          channel_url,
         }
       }
     }

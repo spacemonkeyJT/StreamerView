@@ -16,6 +16,7 @@ export default function TrackedChannels(props: Props) {
             <th>Username</th>
             <th>Status</th>
             <th>Category</th>
+            <th>Thumbnail</th>
             <th>Viewers</th>
             <th>Uptime</th>
             <th>Title</th>
@@ -29,8 +30,9 @@ export default function TrackedChannels(props: Props) {
               <td>{channel.user_name}</td>
               <td>{channel.type}</td>
               <td>{channel.game_name}</td>
+              <td>{channel.thumbnail_url && <img src={`${channel.thumbnail_url?.replace('{width}', '89').replace('{height}', '50')}`} />}</td>
               <td>{channel.viewer_count}</td>
-              <td>{channel.started_at}</td>
+              <td>{channel.uptime}</td>
               <td>{channel.title}</td>
               <td>{channel.user_description}</td>
             </tr>

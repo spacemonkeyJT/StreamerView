@@ -18,14 +18,15 @@ function App() {
     }
   }, [channels, authorized])
 
+  function updateChannels(updatedChannels: ChannelSummary[]) {
+    saveChannels(updatedChannels)
+    setChannels(updatedChannels)
+  }
+
   if (authorized) {
     return <>
-      <SearchBox channels={channels} setChannels={updatedChannels => {
-        saveChannels(updatedChannels)
-        setChannels(updatedChannels)
-      }} />
-
-      <TrackedChannels channels={channels} />
+      <SearchBox channels={channels} setChannels={updateChannels} />
+      <TrackedChannels channels={channels} setChannels={updateChannels} />
     </>
   }
   return null

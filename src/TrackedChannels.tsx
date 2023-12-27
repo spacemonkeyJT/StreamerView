@@ -3,6 +3,7 @@ import './TrackedChannels.css'
 
 interface Props {
   channels: ChannelSummary[]
+  setChannels: (channels: ChannelSummary[]) => void
 }
 
 export default function TrackedChannels(props: Props) {

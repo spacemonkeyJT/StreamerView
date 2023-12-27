@@ -1,11 +1,18 @@
+import { useState } from "react"
+import SearchBox from "./SearchBox"
 import TrackedChannels from "./TrackedChannels"
-import { useTwitchAuth } from "./Twitch"
+import { ChannelSummary, useTwitchAuth } from "./twitch"
 
 function App() {
+  const [channels, setChannels] = useState<ChannelSummary[]>([])
+
   const authorized = useTwitchAuth()
 
   if (authorized) {
-    return <TrackedChannels />
+    return <>
+      <SearchBox channels={channels} setChannels={setChannels} />
+      <TrackedChannels channels={channels} />
+    </>
   }
   return null
 }

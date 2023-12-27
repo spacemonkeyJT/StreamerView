@@ -52,6 +52,10 @@ function OfflineCard({ channel }: { channel: ChannelSummary }) {
   </div>
 }
 
+function NoChannelsMessage() {
+  return <p>No channels found.</p>
+}
+
 export default function TrackedChannels(props: Props) {
   const liveChannels = props.channels.filter(r => r.type === 'live')
   const offlineChannels = props.channels.filter(r => r.type !== 'live')
@@ -60,11 +64,11 @@ export default function TrackedChannels(props: Props) {
     <div className="tracked-channels">
       <div className="live-channels">
         <h3>Live Channels</h3>
-        {liveChannels.map(channel => <LiveCard key={channel.user_id} channel={channel} />)}
+        {liveChannels.length > 0 ? liveChannels.map(channel => <LiveCard key={channel.user_id} channel={channel} />) : <NoChannelsMessage />}
       </div>
       <div className="offline-channels">
         <h3>Offline Channels</h3>
-        {offlineChannels.map(channel => <OfflineCard key={channel.user_id} channel={channel} />)}
+        {offlineChannels.length > 0 ? offlineChannels.map(channel => <OfflineCard key={channel.user_id} channel={channel} />) : <NoChannelsMessage />}
       </div>
     </div>
   )

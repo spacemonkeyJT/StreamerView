@@ -6,3 +6,9 @@
   border: none;
   border-radius: 6px;
 }
+
+@media (prefers-color-scheme: light) {
+  .search-box input {
+    background-color: #f9f9f9;
+  }
+}

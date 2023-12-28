@@ -1,0 +1,40 @@
+.channel-page {
+  border: 2px solid #202020;
+  border-radius: 10px;
+  background-color: #363636;
+  padding: 30px;
+  width: 800px;
+  height: 600px;
+  position: fixed;
+  z-index: 1000;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  -webkit-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
+}
+
+.channel-page .thumbnail {
+  width: 316px;
+  height: 178px;
+}
+
+.channel-page .profile-pic {
+  border-radius: 25px;
+}
+
+.channel-page h2 {
+  margin: 0;
+}
+
+/* Light Theme */
+
+@media (prefers-color-scheme: light) {
+  .channel-page {
+    border: 3px solid #000;
+    background-color: #fff;
+  }
+}

@@ -48,6 +48,8 @@ export type ChannelSummary = StreamInfo & {
   broadcaster_type: string
   user_description: string
   channel_url: string
+  offline_image_url: string
+  viewers_desc?: string;
 }
 
 function getSiteUrl() {
@@ -56,6 +58,16 @@ function getSiteUrl() {
   } else {
     return 'https://streamerview.onrender.com'
   }
+}
+
+function getViewersDesc(viewers: number) {
+  if (viewers < 1000) {
+    return `${viewers} viewers`
+  }
+  if (viewers < 10000) {
+    return `${Math.round(viewers / 100) / 10}K viewers`
+  }
+  return `${Math.round(viewers / 1000)}K viewers`
 }
 
 function readToken() {
@@ -108,8 +120,6 @@ export function useTwitchAuth() {
   return !!token
 }
 
-
-
 export async function getChannelInfo(username: string): Promise<ChannelSummary | undefined> {
   const user = (await apiCall<{ data: User[] }>(`users?login=${username}`))?.data[0]
   if (user) {
@@ -130,6 +140,8 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           profile_image_url: user.profile_image_url,
           user_description: user.description,
           channel_url,
+          offline_image_url: user.offline_image_url,
+          viewers_desc: getViewersDesc(stream.viewer_count!),
         }
       } else {
         return {
@@ -145,8 +157,13 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           user_name: user.display_name,
           title: channel.title,
           channel_url,
+          offline_image_url: user.offline_image_url,
         }
       }
     }
   }
+}
+
+export function getSizedThumbnail(url: string, width = 316, height = 178): string {
+  return url.replace('{width}', `${width}`).replace('{height}', `${height}`)
 }

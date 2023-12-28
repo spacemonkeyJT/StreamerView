@@ -30,7 +30,7 @@ function getViewersDesc(viewers: number) {
 }
 
 function LiveCard({ channel }: { channel: ChannelSummary }) {
-  return <div className="live-card">
+  return <div className="live-card grow">
     <a href={channel.channel_url} target="blank">
       <div className="thumbnail"><img src={channel.thumbnail_url?.replace('{width}', '316').replace('{height}', '178')} /></div>
     </a>

@@ -12,25 +12,14 @@ interface CardProps {
   click: (channel: ChannelSummary) => unknown
 }
 
-function getElapsedDesc(since: string) {
-  const startedTimestamp = new Date(since).valueOf()
-  const totalSec = Math.trunc((Date.now() - startedTimestamp) / 1000)
-  const seconds = totalSec % 60
-  const remain = (totalSec - seconds) / 60
-  const minutes = remain % 60
-  const hours = (remain - minutes) / 60
-  const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`
-  const secStr = seconds < 10 ? `0${seconds}` : `${seconds}`
-  const result = `${hours}:${minutesStr}:${secStr}`
-  return result
-}
+
 
 function LiveCard({ channel, click }: CardProps) {
   return (
-    <div className="live-card grow" onClick={() => click(channel)}>
+    <div className="live-card grow shadow" onClick={() => click(channel)}>
       <div className="thumbnail"><img src={getSizedThumbnail(channel.thumbnail_url!)} /></div>
       <div className="title">{channel.title}</div>
-      <div className="uptime">🔴 {getElapsedDesc(channel.started_at!)}</div>
+      <div className="uptime">🔴 {channel.uptime_desc}</div>
       <div className="profile-info">
         <img className="profile-pic" src={channel.profile_image_url} />
         <div className="broadcaster">{channel.user_name}</div>

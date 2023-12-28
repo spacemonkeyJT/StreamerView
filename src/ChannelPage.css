@@ -3,7 +3,7 @@
   border-radius: 10px;
   background-color: #363636;
   padding: 30px;
-  width: 800px;
+  width: 860px;
   height: 600px;
   position: fixed;
   z-index: 1000;
@@ -11,23 +11,78 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  -webkit-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
-  box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.2);
 }
 
 .channel-page .thumbnail {
-  width: 316px;
-  height: 178px;
+  border: 1px solid #20202076;
+  width: 533px;
+  height: 300px;
 }
 
 .channel-page .profile-pic {
-  border-radius: 25px;
+  margin-right: 20px;
+  border: 1px solid #20202076;
 }
 
 .channel-page h2 {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.channel-page .close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+}
+
+.channel-page .partner {
+  width: 25px;
+  height: 25px;
+  transform: translateY(5px)
+}
+
+.channel-page .live,
+.channel-page .offline {
+  font-weight: 700;
+  font-size: 10pt;
+  color: #fff;
+  display: inline-block;
+  padding: 0 7px 2px 7px;
+  border-radius: 5px;
+  transform: translateY(-3px)
+}
+
+.channel-page .live {
+  background-color: #ae0000;
+}
+
+.channel-page .offline {
+  background-color: #4f4f4f;
+}
+
+.channel-page .broadcaster .url {
+  font-weight: normal;
+  font-size: 16pt;
+  color: #7e94cb;
+}
+
+.channel-page .broadcaster .url:hover {
+  text-decoration: underline;
+}
+
+.channel-page .tag {
+  background-color: #4f4f4f;
+  border-radius: 5px;
+  font-size: 10pt;
+  padding: 2px 4px;
+}
+
+.channel-page .uptime {
+  font-weight: 600;
+  font-size: 12pt;
+  display: inline-block;
+  transform: translateY(-2px);
 }
 
 /* Light Theme */

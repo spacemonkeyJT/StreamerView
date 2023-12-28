@@ -50,6 +50,9 @@ export type ChannelSummary = StreamInfo & {
   channel_url: string
   offline_image_url: string
   viewers_desc?: string;
+  content_classification_labels: string[]
+  category_url: string
+  uptime_desc?: string
 }
 
 function getSiteUrl() {
@@ -68,6 +71,19 @@ function getViewersDesc(viewers: number) {
     return `${Math.round(viewers / 100) / 10}K viewers`
   }
   return `${Math.round(viewers / 1000)}K viewers`
+}
+
+function getElapsedDesc(since: string) {
+  const startedTimestamp = new Date(since).valueOf()
+  const totalSec = Math.trunc((Date.now() - startedTimestamp) / 1000)
+  const seconds = totalSec % 60
+  const remain = (totalSec - seconds) / 60
+  const minutes = remain % 60
+  const hours = (remain - minutes) / 60
+  const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`
+  const secStr = seconds < 10 ? `0${seconds}` : `${seconds}`
+  const result = `${hours}:${minutesStr}:${secStr}`
+  return result
 }
 
 function readToken() {
@@ -120,6 +136,10 @@ export function useTwitchAuth() {
   return !!token
 }
 
+function getGameUrlName(name: string): string {
+  return name.replace(/[^a-z0-9\s]/gi, '').replace(/\s/g, '-').toLowerCase()
+}
+
 export async function getChannelInfo(username: string): Promise<ChannelSummary | undefined> {
   const user = (await apiCall<{ data: User[] }>(`users?login=${username}`))?.data[0]
   if (user) {
@@ -130,7 +150,9 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
 
     const channel = channelRes?.data[0]
     const stream = streamRes?.data[0]
+
     const channel_url = `https://www.twitch.tv/${user.login}`
+    const category_url = `https://www.twitch.tv/directory/category/${getGameUrlName(channel.game_name)}`
 
     if (channel) {
       if (stream) {
@@ -142,6 +164,9 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           channel_url,
           offline_image_url: user.offline_image_url,
           viewers_desc: getViewersDesc(stream.viewer_count!),
+          content_classification_labels: channel.content_classification_labels,
+          category_url,
+          uptime_desc: getElapsedDesc(stream.started_at!)
         }
       } else {
         return {
@@ -158,6 +183,8 @@ export async function getChannelInfo(username: string): Promise<ChannelSummary |
           title: channel.title,
           channel_url,
           offline_image_url: user.offline_image_url,
+          content_classification_labels: [],
+          category_url,
         }
       }
     }

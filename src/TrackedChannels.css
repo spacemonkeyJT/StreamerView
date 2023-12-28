@@ -10,7 +10,7 @@ body {
 
 .tracked-channels .live-card {
   position: relative;
-  margin: 10px 10px 40px 10px;
+  margin: 10px 10px 20px 10px;
   display: inline-block;
 }
 
@@ -53,11 +53,16 @@ body {
 .tracked-channels .live-card .thumbnail {
   display: inline-block;
   border: 3px solid #000;
+  background-color: #000;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  width: 316px;
+  height: 184px;
 }
 
 .tracked-channels .live-card .viewers {
   position: absolute;
-  bottom: 0;
+  bottom: 29px;
   left: 0;
   background-color: #000000a0;
   padding: 3px 7px;
@@ -73,13 +78,14 @@ body {
 
 .tracked-channels .live-card .title {
   position: absolute;
-  bottom: -30px;
-  left: 0;
-  width: 312px;
+  bottom: -1px;
+  left: 2px;
+  width: 300px;
   padding: 5px;
   white-space: nowrap;
   overflow: hidden;
   color: #ccc;
+  font-size: 10pt;
 }
 
 .tracked-channels .offline-card {

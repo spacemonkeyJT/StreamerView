@@ -28,10 +28,21 @@ function App() {
     setChannels(updatedChannels)
   }
 
+  function removeChannel(channel: ChannelSummary) {
+    setSelectedChannel(undefined)
+    updateChannels(channels.filter(r => r !== channel))
+  }
+
   if (authorized) {
     if (initialized) {
       return <>
-        {selectedChannel && <ChannelPage channel={selectedChannel} close={() => setSelectedChannel(undefined)} />}
+        {selectedChannel && (
+          <ChannelPage
+            channel={selectedChannel}
+            close={() => setSelectedChannel(undefined)}
+            remove={() => removeChannel(selectedChannel)}
+          />
+        )}
         <SearchBox channels={channels} setChannels={updateChannels} />
         <TrackedChannels channels={channels} setChannels={updateChannels} setSelectedChannel={setSelectedChannel} />
       </>

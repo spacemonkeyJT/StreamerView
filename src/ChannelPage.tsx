@@ -1,16 +1,17 @@
 import './ChannelPage.css'
 import { ChannelSummary, getSizedThumbnail } from './twitch'
 import partnerLogo from './assets/partner.svg'
+import offlineLogo from './assets/offline.svg'
 import { useEffect, useRef } from 'react'
 
 interface Props {
   channel: ChannelSummary
   close: () => unknown
+  remove: () => unknown
 }
 
-export default function ChannelPage({ channel, close }: Props) {
-  // TODO: Set a default offline image
-  const thumbUrl = channel.thumbnail_url ?? channel.offline_image_url ?? ''
+export default function ChannelPage({ channel, close, remove }: Props) {
+  const thumbUrl = channel.thumbnail_url || channel.offline_image_url || offlineLogo
 
   const isLive = channel.type === 'live'
   const isPartner = channel.broadcaster_type === 'partner'
@@ -45,7 +46,10 @@ export default function ChannelPage({ channel, close }: Props) {
 
   return (
     <div className="channel-page shadow2" ref={myRef}>
-      <button className="close-button" type="button" onClick={close}>Close</button>
+      <div className="buttons">
+        <button type="button" onClick={remove}>Remove</button>&nbsp;
+        <button type="button" onClick={close}>Close</button>
+      </div>
       <h2 className="broadcaster">
         {channel.user_name} {isPartner && <img className="partner" src={partnerLogo} />}&nbsp;
         {isLive && <>
@@ -56,19 +60,19 @@ export default function ChannelPage({ channel, close }: Props) {
       {isLive ? (
         <p>
           Playing <a target="_blank" href={channel.category_url}>{channel.game_name}</a> for {channel.viewers_desc} at <a target="_blank" href={channel.channel_url}>{channel.channel_url}</a><br />
-          {channel.content_classification_labels.map(tag => <><span className="tag" key={tag}>{tag}</span>&nbsp;</>)}
+          {channel.content_classification_labels.map((tag, idx) => <span key={idx}><span className="tag">{tag}</span>&nbsp;</span>)}
         </p>
       ) : (
         <p>
           Last played <a target="_blank" href={channel.category_url}>{channel.game_name}</a> at <a target="_blank" href={channel.channel_url}>{channel.channel_url}</a><br />
-          {channel.content_classification_labels.map(tag => <><span className="tag" key={tag}>{tag}</span>&nbsp;</>)}
+          {channel.content_classification_labels.map((tag, idx) => <span key={idx}><span className="tag">{tag}</span>&nbsp;</span>)}
         </p>
       )}
       <img className="profile-pic shadow" src={channel.profile_image_url} />
       <img className="thumbnail shadow" src={getSizedThumbnail(thumbUrl, 533, 300)} />
       <p className="stream-info">
         <span className="title">{channel.title}</span><br />
-        {channel.tags.map(tag => <><span className="tag" key={tag}>{tag}</span>&nbsp;</>)}<br />
+        {channel.tags.map((tag, idx) => <span key={idx}><span className="tag">{tag}</span>&nbsp;</span>)}<br />
       </p>
       {/* {channel.language && <div className="language">Language: {channel.language.toLocaleUpperCase()}</div>} */}
       <p className="bio">

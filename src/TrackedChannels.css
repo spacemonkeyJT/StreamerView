@@ -8,10 +8,13 @@ body {
   border-radius: 25px;
 }
 
+/* Live Card */
+
 .tracked-channels .live-card {
   position: relative;
   margin: 10px 10px 20px 10px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .tracked-channels .live-card .profile-pic {
@@ -92,9 +95,12 @@ body {
   font-size: 10pt;
 }
 
+/* Offline Card */
+
 .tracked-channels .offline-card {
   margin: 10px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .tracked-channels .offline-card img {
@@ -102,6 +108,8 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Light Theme */
 
 @media (prefers-color-scheme: light) {
   .tracked-channels .live-card .profile-info .broadcaster,

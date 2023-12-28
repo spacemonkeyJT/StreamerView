@@ -47,7 +47,9 @@ function LiveCard({ channel }: { channel: ChannelSummary }) {
 
 function OfflineCard({ channel }: { channel: ChannelSummary }) {
   return <div className="offline-card">
-    <img className="profile-pic" src={channel.profile_image_url} />
+    <a href={channel.channel_url} target="blank">
+      <img className="profile-pic" src={channel.profile_image_url} />
+    </a>
     <div className="broadcaster">{channel.user_name}</div>
   </div>
 }

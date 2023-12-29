@@ -15,6 +15,7 @@ body {
   margin: 10px 10px 20px 10px;
   display: inline-block;
   cursor: pointer;
+  aspect-ratio: 16/9;
 }
 
 .tracked-channels .live-card .profile-pic {
@@ -112,5 +113,30 @@ body {
   .tracked-channels .live-card .viewers,
   .tracked-channels .live-card .uptime {
     color: #fff;
+  }
+}
+
+@media only screen and (max-width: 712px) {
+  body {
+    margin: 0;
+  }
+
+  .tracked-channels h3 {
+    margin: 10px;
+  }
+
+  .tracked-channels .live-card {
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .tracked-channels .live-card .thumbnail {
+    width: calc(100% - 5px);
+    aspect-ratio: 16/9;
+    height: inherit;
+  }
+
+  .tracked-channels .live-card .thumbnail img {
+    width: 100%;
   }
 }

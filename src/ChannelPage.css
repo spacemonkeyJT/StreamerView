@@ -16,7 +16,7 @@
 .channel-page .thumbnail {
   border: 1px solid #20202076;
   width: 533px;
-  height: 300px;
+  aspect-ratio: 16/9;
 }
 
 .channel-page .profile-pic {
@@ -95,5 +95,49 @@
 
   .channel-page .tag {
     color: #fff;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .channel-page {
+    top: 0;
+    left: 0;
+    transform: inherit;
+    border: none;
+    border-radius: 0;
+    width: calc(100% - 60px);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .channel-page .buttons {
+    margin: 8px;
+  }
+
+  .channel-page .buttons button {
+    padding: 6px 12px 8px 12px;
+    font-size: 11pt;
+  }
+
+  .channel-page .broadcaster {
+    margin-top: 12px;
+  }
+
+  .channel-page .profile-pic {
+    width: 150px;
+  }
+
+  .channel-page .thumbnail {
+    width: 267px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .channel-page .profile-pic {
+    width: 100px;
+  }
+
+  .channel-page .thumbnail {
+    width: 178px;
   }
 }

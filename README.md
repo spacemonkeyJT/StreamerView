@@ -1,30 +1,7 @@
-# React + TypeScript + Vite
+# StreamerView
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple web app designed primarily to allow streamers to create and view a list of Twitch channels, e.g. to keep track of raid suggestions without actually following the channels, to help with choosing a raid target at the end of stream. The site lets you manage a list of channels which are shown as thumbnails of the streams with details such as their name, what they're playing, how long they've been live, view count, bio, etc.
 
-Currently, two official plugins are available:
+It's currently hosted here: https://streamerview.onrender.com/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Feel free to try it out and raise issues if you have any feedback <3

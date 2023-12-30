@@ -105,7 +105,10 @@ async function apiCall<T>(url: string) {
       'Client-Id': clientID
     }
   })
-  if (res.status >= 400) {
+  if (res.status === 401 || res.status === 403) {
+    window.localStorage.setItem('token', '')
+    window.location.reload()
+  } else if (res.status >= 400) {
     throw {
       message: `Error during request to ${url}`,
       statusCode: res.status,

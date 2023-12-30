@@ -1,7 +1,10 @@
 {
   "name": "streamerview",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "spacemonkeyJT",
+  "license": "MIT",
+  "repository": "https://github.com/spacemonkeyJT/StreamerView",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",

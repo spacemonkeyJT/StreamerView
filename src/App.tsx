@@ -53,6 +53,8 @@ function App() {
         </div>
       )
     }
+  } else if (authorized === false) {
+    return <p>Authorization failed.</p>
   }
   return null
 }

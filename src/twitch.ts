@@ -105,38 +105,68 @@ async function apiCall<T>(url: string) {
       'Client-Id': clientID
     }
   })
-  if (res.status === 401 || res.status === 403) {
-    window.localStorage.setItem('token', '')
-    window.location.reload()
-  } else if (res.status >= 400) {
+  if (res.status >= 400) {
     throw {
       message: `Error during request to ${url}`,
       statusCode: res.status,
     }
   }
+  window.localStorage.removeItem('retryauth')
   return await res.json() as T
 }
 
+
 export function useTwitchAuth() {
-  const [token, setToken] = useState<string | null>(null)
+  const [authResult, setAuthResult] = useState<boolean | null>(null)
+
+  function doAuthorize() {
+    window.location.href = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientID}&redirect_uri=${getSiteUrl()}&scope=`
+  }
+
+  function onAuthorized(newToken: string) {
+    window.localStorage.setItem('token', newToken)
+    setAuthResult(true)
+  }
 
   useEffect(() => {
     const initialToken = readToken()
     if (initialToken) {
-      setToken(initialToken)
+      onAuthorized(initialToken)
     } else {
       const match = /access_token=([^&]+)/.exec(window.location.hash)
       if (match) {
         window.location.hash = ''
         window.localStorage.setItem('token', match[1])
-        setToken(match[1])
+        onAuthorized(match[1])
       } else {
-        window.location.href = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientID}&redirect_uri=${getSiteUrl()}&scope=`
+        doAuthorize()
       }
     }
   }, [])
 
-  return !!token
+  useEffect(() => {
+    function onError(e: PromiseRejectionEvent) {
+      const reqErr = e.reason as { message: string, statusCode: number }
+      if (reqErr.statusCode === 401 || reqErr.statusCode === 403) {
+        window.localStorage.removeItem('token')
+        console.error('Authorization failure')
+        if (window.localStorage.getItem('retryauth')) {
+          console.error('Retry failed, stopping')
+          setAuthResult(false)
+        } else {
+          window.localStorage.setItem('retryauth', 'true')
+          console.log('Retrying')
+          doAuthorize()
+        }
+      }
+    }
+    window.addEventListener('unhandledrejection', onError)
+    return () => {
+      window.removeEventListener('unhandledrejection', onError)
+    }
+  }, [])
+
+  return authResult
 }
 
 function getGameUrlName(name: string): string {
